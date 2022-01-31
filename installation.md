@@ -19,8 +19,7 @@ $ nano
 # SECRET_SESSION = a-long-string-that-should-be-hard-to-crack
 
 # seed the database
-$ node bin/seed.js
-$ ctrl + c to kill the node shell
+$ npm run seed:all   
 
 # then you're ready to launch the backend
 $ npm run dev
