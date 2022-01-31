@@ -9,7 +9,7 @@ const IconGoBack = ({ size = "1x" }) => {
 		<FontAwesomeIcon
 			title="browse back to previous page"
 			className="link is-clickable"
-			onClick={navigate(-1)}
+			onClick={() => navigate(-1)}
 			size={size}
 			icon={faArrowAltCircleLeft}
 		/>

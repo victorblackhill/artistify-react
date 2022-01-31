@@ -26,14 +26,13 @@ const UserProvider = ({ children }) => {
 			})
 			.catch((e) => {
 				console.log("not logged");
-
 				setCurrentUser(null);
 				setIsLoading(false);
 				setIsLoggedIn(false);
 			});
 	};
 
-	const removeUser = () => {
+	const removeUser = (clbk) => {
 		APIHandler.post(`${process.env.REACT_APP_BACKEND_URL}/signout`).finally(
 			() => {
 				setCurrentUser(null);

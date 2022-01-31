@@ -66,16 +66,12 @@ export default function App() {
 							{/* check the protected route in src/auth folder */}
 							<Route element={<ProtectedRoute />}>
 								<Route path="/dashboard" element={<Dashboard />} />
+								{/* Routes here have different endpoint (albums, artists, labels, styles) */}
+								<Route path="/admin/:endpoint/" element={<AdminTables />} />
+								{/* The mode will be used to either display a create form or update form */}
+								<Route path="/admin/:endpoint/:mode" element={<AdminForms />} />
 								<Route
-									path="/admin/:endpoint(albums|artists|labels|styles)/"
-									element={<AdminTables />}
-								/>
-								<Route
-									path="/admin/:endpoint(albums|artists|labels|styles)/:mode"
-									element={<AdminForms />}
-								/>
-								<Route
-									path="/admin/:endpoint(albums|artists|labels|styles)/:mode/:id"
+									path="/admin/:endpoint/:mode/:id"
 									element={<AdminForms />}
 								/>
 							</Route>

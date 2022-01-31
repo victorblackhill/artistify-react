@@ -11,8 +11,7 @@ export default function IconSignout(props) {
 
 	const handleSignout = () =>
 		APIHandler.post("/signout").finally(() => {
-			removeUser();
-			navigate("/signin");
+			removeUser(navigate("/signin"));
 		});
 
 	return (
