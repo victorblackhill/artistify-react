@@ -16,12 +16,17 @@ const UserProvider = ({ children }) => {
 	const authenticateUser = (clbk) => {
 		APIHandler.get(`${process.env.REACT_APP_BACKEND_URL}/is-loggedin`)
 			.then(({ data }) => {
+				setIsLoggedIn(true);
+				console.log("logged");
 				setCurrentUser(data);
 				setIsLoading(false);
-				setIsLoggedIn(true);
-				clbk();
+				if (clbk) {
+					clbk();
+				}
 			})
 			.catch((e) => {
+				console.log("not logged");
+
 				setCurrentUser(null);
 				setIsLoading(false);
 				setIsLoggedIn(false);

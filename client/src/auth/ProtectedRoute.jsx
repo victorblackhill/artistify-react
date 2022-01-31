@@ -5,7 +5,7 @@ import useAuth from "./useAuth";
 export const ProtectedRoute = () => {
 	const { isLoggedIn, isLoading, currentUser } = useAuth();
 	// return default template while performing async auth task
-	console.log(isLoading);
+	console.log(isLoggedIn);
 	if (isLoading) return <div>Loading...</div>;
 	return isLoggedIn ? (
 		// if logged in, return the Outlet
