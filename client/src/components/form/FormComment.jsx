@@ -1,16 +1,14 @@
-import React, { Component } from "react";
 // styles
 import "./../../styles/form.css";
 
-export default class FormComment extends Component {
+const FormComment = () => {
+	const { message } = this.state;
 
-  render() {
-    const { message } = this.state;
+	return (
+		<form className="form">
+			<button className="btn">send!</button>
+		</form>
+	);
+};
 
-    return (
-      <form className="form">
-        <button className="btn">send!</button>
-      </form>
-    );
-  }
-}
+export default FormComment;

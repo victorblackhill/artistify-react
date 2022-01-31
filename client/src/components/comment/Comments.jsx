@@ -1,19 +1,12 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 // import FormComment from "../form/FormComment";
 // import apiHandler from "../../api/APIHandler";
 // import Comment from "./Comment";
 
-export default class Comments extends Component {
-  state = {
-    comments: []
-  };
+const Comments = () => {
+	const [comments, setComments] = useState([]);
 
-  render() {
+	return <div className="comments">comments</div>;
+};
 
-    return (
-      <div className="comments">
-        comments
-      </div>
-    );
-  }
-}
+export default Comments;

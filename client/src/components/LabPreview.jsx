@@ -8,23 +8,23 @@ import artistForm from "../assets/img/previews/artist.form.screen.png";
 import artists from "../assets/img/previews/artists.screen.png";
 
 const previews = {
-  album,
-  albumForm,
-  albums,
-  artist,
-  artistForm,
-  artists
+	album,
+	albumForm,
+	albums,
+	artist,
+	artistForm,
+	artists,
 };
 
 export default function LabPreview({ name, isSmall }) {
-  return (
-    <div className="lab-preview">
-      <h1 className="title diy">Image Preview =></h1>
-      <img
-        src={previews[name]}
-        alt="lab preview"
-        style={{ display: "block", width: isSmall ? "50%" : "100%" }}
-      />
-    </div>
-  );
+	return (
+		<div className="lab-preview">
+			<h1 className="title diy">Image Preview {"=>"}</h1>
+			<img
+				src={previews[name]}
+				alt="lab preview"
+				style={{ display: "block", width: isSmall ? "50%" : "100%" }}
+			/>
+		</div>
+	);
 }

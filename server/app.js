@@ -34,20 +34,20 @@ Note:  Session data is not saved in the cookie itself, just the session ID.
 Session data is stored server-side.
 */
 app.use(
-  session({
-    cookie: { secure: false, maxAge: 4 * 60 * 60 * 1000 }, // 4 hours
-    resave: true,
-    saveUninitialized: true,
-    secret: process.env.SECRET_SESSION
-  })
+	session({
+		cookie: { secure: false, maxAge: 4 * 60 * 60 * 1000 }, // 4 hours
+		resave: true,
+		saveUninitialized: true,
+		secret: process.env.SECRET_SESSION,
+	})
 );
 
 // this rule allows the client app to exchange via http via the server (AJAX ... Axios)
 const corsOptions = {
-  origin: [process.env.CLIENT_URL],
-  /* credentials : Configures the Access-Control-Allow-Credentials CORS header. Set to true to pass the header, otherwise it is omitted  https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials */
-  credentials: true,
-  optionsSuccessStatus: 200
+	origin: [process.env.CLIENT_URL],
+	/* credentials : Configures the Access-Control-Allow-Credentials CORS header. Set to true to pass the header, otherwise it is omitted  https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials */
+	credentials: true,
+	optionsSuccessStatus: 200,
 };
 
 // cors middle on
@@ -61,24 +61,24 @@ app.use(passport.session());
 // Check Loggedin Users
 // ------------------------------------------
 if (_DEVMODE === true) {
-  app.use(function devMode(req, res, next) {
-    req.user = {
-      _id: "5de9c376fa023e21a766a606",
-      username: "guillaume",
-      email: "gui@foo.bar",
-      avatar:
-        "https://res.cloudinary.com/gdaconcept/image/upload/v1575298339/user-pictures/jadlcjjnspfhknucjfkd.png",
-      role: "admin",
-      favorites: {
-        artists: ["5ded0f32701e2f8732a0513c"],
-        albums: ["5ded24e254c2839b2badf011"],
-        styles: [],
-        labels: []
-      }
-    };
+	app.use(function devMode(req, res, next) {
+		req.user = {
+			_id: "5de9c376fa023e21a766a606",
+			username: "guillaume",
+			email: "gui@foo.bar",
+			avatar:
+				"https://res.cloudinary.com/gdaconcept/image/upload/v1575298339/user-pictures/jadlcjjnspfhknucjfkd.png",
+			role: "admin",
+			favorites: {
+				artists: ["5ded0f32701e2f8732a0513c"],
+				albums: ["5ded24e254c2839b2badf011"],
+				styles: [],
+				labels: [],
+			},
+		};
 
-    next();
-  });
+		next();
+	});
 }
 
 //------------------------------------------
@@ -86,7 +86,7 @@ if (_DEVMODE === true) {
 // ------------------------------------------
 
 app.get("/", (req, res) => {
-  res.send("backend server is running");
+	res.send("backend server is running");
 });
 
 //------------------------------------------

@@ -1,27 +1,27 @@
-import React, { useContext } from "react";
-import { withRouter } from "react-router-dom";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import APIHandler from "../../api/APIHandler";
-import UserContext from "../../auth/UserContext";
+import useAuth from "../../auth/useAuth";
 
-export default withRouter(function IconSignout(props) {
-  const userContext = useContext(UserContext);
-  const { setCurrentUser } = userContext;
+export default function IconSignout(props) {
+	const { removeUser } = useAuth();
+	const navigate = useNavigate();
 
-  const handleSignout = () =>
-    APIHandler.post("/signout").finally(() => {
-      props.history.push("/signin")
-      setCurrentUser(null);
-    });
+	const handleSignout = () =>
+		APIHandler.post("/signout").finally(() => {
+			removeUser();
+			navigate("/signin");
+		});
 
-  return (
-    <FontAwesomeIcon
-      onClick={handleSignout}
-      className="link icon-signout is-clickable"
-      icon={faSignOutAlt}
-      size="xs"
-      title="signout"
-    />
-  );
-})
+	return (
+		<FontAwesomeIcon
+			onClick={handleSignout}
+			className="link icon-signout is-clickable"
+			icon={faSignOutAlt}
+			size="xs"
+			title="signout"
+		/>
+	);
+}
