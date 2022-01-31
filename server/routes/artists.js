@@ -57,11 +57,12 @@ router.get("/filtered-artists", (req, res, next) => {
 
 router.post(
   "/artists",
-  fileUploader.single("artistify-react"),
+  fileUploader.single("picture"),
 
   async (req, res, next) => {
-    try {
-      const created = await artistModel.create(req.body);
+    const picture = req.file?.path || undefined;
+    try { 
+      const created = await artistModel.create({...req.body,picture});
       res.status(200).json({ ...created, msg: "created new artist" });
     } catch (err) {
       next(err);
@@ -71,10 +72,9 @@ router.post(
 
 router.patch(
   "/artists/:id",
-  fileUploader.single("artistify-react"),
+  fileUploader.single("picture"),
   async (req, res, next) => {
     try {
-      console.log("here", req.body, req.params);
       const updated = await artistModel.findByIdAndUpdate(
         req.params.id,
         req.body,

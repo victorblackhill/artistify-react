@@ -10,12 +10,18 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
 	cloudinary,
-	folder: "user-pictures",
+	params: {
+		allowed_formats: ['jpg', "jpeg", 'png', "gif"],
+		folder: 'cohort-2911'
+	}
 	//  params below is only needed if uploading media types other than images (video, audio...)
 	// params: {
 	//     ressource_type: "raw"
 	// }
 });
+
+//cloudinary.uploader.upload("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==", function(error, result) {console.log(result, "error >>",error); });
+
 
 const fileUploader = multer({ storage });
 
