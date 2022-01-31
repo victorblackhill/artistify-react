@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 // custom tools
-import apiHandler from "../api/APIHandler";
+// import apiHandler from "../api/APIHandler";
 // import CardAlbum from "../components/card/CardAlbum";
 // import Comments from "../components/comment/Comments";
 // import List from "../components/List";

@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 // custom tools
-import IconFav from "../icon/IconFavorite";
+// import IconFav from "../icon/IconFavorite";
 // styles
 import "./../../styles/icon-color.css";
 
