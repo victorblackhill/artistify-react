@@ -6,12 +6,11 @@ import useAuth from "../../auth/useAuth";
 
 export default function NavAdmin() {
 	const { isLoading, currentUser } = useAuth();
-
 	if (isLoading) return null;
 
 	return (
 		<nav id="nav_admin" className="nav row">
-			{currentUser && currentUser.role === "admin" && (
+			{currentUser && currentUser.currentUser.role === "admin" && (
 				<>
 					<FontAwesomeIcon icon={faCog} />
 					&nbsp;

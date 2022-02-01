@@ -2,8 +2,9 @@
 import LabPreview from "../LabPreview";
 // styles
 import "./../../styles/form.css";
-import React,{useState, useRef} from "react"
+import React,{useState, useRef, useEffect} from "react"
 import APIHandler from "./../../api/APIHandler"
+import {useParams} from "react-router-dom";
 
 const FormArtist = () => {
 	
@@ -24,21 +25,46 @@ const FormArtist = () => {
 
 	//render the form in the view
 
+	const params=useParams()
+	console.log(params.mode)
+	
 	const[artist,setArtist] = useState({
-		name:"name",
-		description:"description",
- 		isBand:false,
-		baseStyles:[""],
-		picture:"picture"
-		})
+										name:"name",
+										description:"description",
+										isBand:false,
+										baseStyles:[""],
+										picture:"picture"
+										})
+
+	
+	const updateCallback =  async ()=>{
+		const res = await APIHandler.get("/artists/"+ params.id)
+		console.log(res.data._doc)
+		setArtist(res.data._doc)
+
+	}
+	if(params.mode==="edit"){
+		// eslint-disable-next-line react-hooks/rules-of-hooks
+		useEffect(updateCallback,[])
+	}
+																	
+	
+													
 	const imageRef = useRef("");
 
 	const theSender = async (formData)=>{
 
 		try{
-			const res = await APIHandler.post("/artists",formData)
-			console.log("done", res.data) 
-
+			
+			if (params.mode==="create"){
+				const res = await APIHandler.post("/artists",formData)
+				console.log("done", res.data) 
+			} else if (params.mode==="edit"){
+				const res = await APIHandler.patch("/artists/" +params.id,formData)
+				console.log("done", res.data) 
+			}
+			
+			
 		}catch(err){console.error(err)}
 
 	}
@@ -63,8 +89,8 @@ const FormArtist = () => {
 		<>
 			<h1 className="title diy">D.I.Y (FormArtist)</h1>
 			
-			<div>
-				<label htmlFor="name">Name</label>
+			<div className = "form">
+				<label className="label" htmlFor="name">Name</label>
 				<input
 				value={artist.name}
 				id="name"
@@ -74,8 +100,8 @@ const FormArtist = () => {
 				onChange={(e) => setArtist({ ...artist, name: e.target.value })}
 				/>
 				
-				<label htmlFor="description" >Description</label>
-				<input
+				<label className="label" htmlFor="description" >Description</label>
+				<textarea
 				id="description"
 				className="input"
 				value={artist.description}
@@ -84,23 +110,25 @@ const FormArtist = () => {
 				onChange={(e) => setArtist({ ...artist, description: e.target.value })}
 				/>
 
-				<label htmlFor="isBand">Band</label>
+				<label className="label" htmlFor="isBand">Band</label>
 				<input
 				id="isBand"
-				value={artist.isBand}
+				checked={artist.isBand}
 				type="checkbox"
-				onChange={(e) => setArtist({ ...artist, isBand: e.target.value })}
+				onChange={(e) => setArtist({ ...artist, isBand: e.target.checked })}
 				/>
 
-				<input ref={imageRef} name="picture" type="file" />
-				<button onClick={domHandler}>ok</button>
+				<input className="label" ref={imageRef} name="picture" type="file" />
+				<button className="btn" onClick={domHandler}>ok</button>
 				
 			</div>
 
-			<LabPreview name="artistForm" isSmall />
+			
 			<hr />
 		</>
 	);
 };
 
 export default FormArtist;
+
+//<LabPreview name="artistForm" isSmall />

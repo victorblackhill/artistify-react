@@ -47,8 +47,13 @@ router.get("/artists", async (req, res, next) => {
     .catch(next);
 });
 
-router.get("/artists/:id", (req, res, next) => {
-  res.status(200).json({ msg: "@todo" });
+router.get("/artists/:id", async (req, res, next) => {
+  try { 
+      const fetched = await artistModel.findById(req.params.id);
+      res.status(200).json({...fetched, msg: "fetched artist" });
+    } catch (err) {
+      next(err);
+    }
 });
 
 router.get("/filtered-artists", (req, res, next) => {
